@@ -1,0 +1,108 @@
+﻿@model deleteinsertapp.Models.HomeViewModel
+
+<div class="container-fluid test-field">
+    <form method="post" action="~/Home/edit">
+        <div id="count" title="@Model.Count" class="row  flex-wrap">
+            <div class="col-1"></div>
+            <div class="col-10">
+                <div class="row input-field" id="inputfield1">
+                    <div class="col-4">
+                        １：
+                        @Html.TextBoxFor(model => model.LIC1,
+                        new { id = "input1", size = "40" ,onInput = "checkForm(this)",maxlength = '2' })
+                    </div>
+                    <div class="col-4">
+                        @Html.DropDownListFor(model => model.MM1,
+                            (IEnumerable<SelectListItem>)ViewBag.SelectOptions,
+                            " 月 ",
+                            new { @id = "mm1", value = @Model.MM1 }
+                        )
+                    </div>
+                    <div class="col-4">
+                    </div>
+                </div>
+                <div class="row input-field" id="inputfield2">
+                    <div class="col-4">
+                        ２：
+                        @Html.TextBoxFor(model => model.LIC2,
+                        new { id = "input2", size = "40", onInput = "checkForm(this)", maxlength = '2' })
+                    </div>
+                    <div class="col-4">
+                        @Html.DropDownListFor(model => model.MM2,
+                            (IEnumerable<SelectListItem>)ViewBag.SelectOptions,
+                            " 月 ",
+                            new { @id = "mm2" , value = @Model.MM2 }
+                        )
+                    </div>
+                    <div class="col-4">
+                        <input type="button" value="削除" onclick="clickBtn2(2)" />
+                    </div>
+                </div>
+                <div class="row input-field" id="inputfield3">
+                    <div class="col-4">
+                        ３：
+                        @Html.TextBoxFor(model => model.LIC3,
+                        new { id = "input3", size = "40", onInput = "checkForm(this)" })
+                    </div>
+                    <div class="col-4">
+                        @Html.DropDownListFor(model => model.MM3,
+                            (IEnumerable<SelectListItem>)ViewBag.SelectOptions,
+                            " 月 ",
+                            new { @id = "mm3", value = @Model.MM3 }
+                        )
+                    </div>
+                    <div class="col-4">
+                        <input type="button" value="削除" onclick="clickBtn2(3)" />
+                    </div>
+                </div>
+                <div class="row input-field" id="inputfield4">
+                    <div class="col-4">
+                        ４：
+                        @Html.TextBoxFor(model => model.LIC4,
+                        new { id = "input4", size = "40", onInput = "checkForm(this)" })
+                    </div>
+                    <div class="col-4">
+                        @Html.DropDownListFor(model => model.MM4,
+                            (IEnumerable<SelectListItem>)ViewBag.SelectOptions,
+                            " 月 ",
+                            new { @id = "mm4", value = @Model.MM4 }
+                        )
+                    </div>
+                    <div class="col-4">
+                        <input type="button" value="削除" onclick="clickBtn2(4)" />
+                    </div>
+                </div>
+            </div>
+            <div class="row test-field">
+                <div class="col-6">
+                    <div id="output_message"></div>
+                </div>
+                <div class="col-3">
+
+                    <input type="button" value="追加" onclick="clickBtn1()" />
+                </div>
+                <div class="col-3">
+                    <button type="submit" class="button btn-primary">Update</button>
+                </div>
+            </div>
+
+            <div class="col-1"></div>
+        </div>
+    </form>
+</div>
+
+
+<script src="~/Scripts/text-adddelete.js">
+</script>
+
+<script type="text/javascript">
+<!--
+    function checkForm($this) {
+        var str = $this.value;
+        while (str.match(/[^A-Z^a-z^{2}]/)) {
+            str = str.replace(/[^A-Z^a-z^{2}]/, "");
+        }
+        $this.value = str;
+    }
+//-->
+</script>
