@@ -51,7 +51,6 @@ namespace deleteinsertapp.Controllers
                 throw;
                 //this.ModelState.AddModelError(string.Empty, "プロフィールを変更することが出来ませんでした。");
             }
-            return RedirectToAction("Index");
         }
 
         private List<HomeModel> getHomeList()

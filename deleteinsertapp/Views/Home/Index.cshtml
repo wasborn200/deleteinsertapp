@@ -42,7 +42,7 @@
                     <div class="col-4">
                         ３：
                         @Html.TextBoxFor(model => model.LIC3,
-                        new { id = "input3", size = "40", onInput = "checkForm(this)" })
+                        new { id = "input3", size = "40", onInput = "checkForm(this)", maxlength = '2' })
                     </div>
                     <div class="col-4">
                         @Html.DropDownListFor(model => model.MM3,
@@ -59,7 +59,7 @@
                     <div class="col-4">
                         ４：
                         @Html.TextBoxFor(model => model.LIC4,
-                        new { id = "input4", size = "40", onInput = "checkForm(this)" })
+                        new { id = "input4", size = "40", onInput = "checkForm(this)", maxlength = '2' })
                     </div>
                     <div class="col-4">
                         @Html.DropDownListFor(model => model.MM4,
@@ -104,5 +104,12 @@
         }
         $this.value = str;
     }
+
+    $(document).on('ontouched click', '.autocomplete', function () {
+        var text = $(this).data('autocomplete');
+        var target = $(this).data('target');
+        $('input[name="' + target + '"]').val(text);
+    });
+
 //-->
 </script>
