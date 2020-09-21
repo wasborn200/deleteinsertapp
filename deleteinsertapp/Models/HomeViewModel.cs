@@ -19,5 +19,10 @@ namespace deleteinsertapp.Models
         public string MM3 { get; set; }
         public string LIC4 { get; set; }
         public string MM4 { get; set; }
+
+        public List<HomeViewModel> AutocompleteList { get; set; }
+
+        public string Code { get; set; }
+        public string LicenseName { get; set; }
     }
 }

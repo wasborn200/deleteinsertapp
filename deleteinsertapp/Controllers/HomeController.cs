@@ -33,6 +33,31 @@ namespace deleteinsertapp.Controllers
 
             ViewBag.SelectOptions = Util.DropDownList.getSelectListItem();
 
+            // オートコンプリート入手
+            //List<HomeViewModel> autocompleteViewList = new List<HomeViewModel>();
+            //List<HomeModel> autocompleteList = getAutocompleteList();
+            //foreach (var item in autocompleteList)
+            //{
+            //    HomeViewModel homeViewModel = new HomeViewModel();
+            //    homeViewModel.Code = item.Code;
+            //    homeViewModel.LicenseName = item.LicenseName;
+            //    autocompleteViewList.Add(homeViewModel);
+            //}
+            //vm.AutocompleteList = autocompleteViewList;
+
+
+            // オートコンプリート入手(パターン２)
+            List<HomeModel> autocompleteList = getAutocompleteList();
+            List<SelectListItem> selectoptions = new List<SelectListItem>();
+            foreach (var item in autocompleteList)
+            {
+                selectoptions.Add(new SelectListItem() { Value = item.LicenseName });
+            }
+            ViewBag.AutocompleteOptions = selectoptions;
+
+
+
+
             return View(vm);
 
         }
@@ -103,6 +128,25 @@ namespace deleteinsertapp.Controllers
                 throw;
             }
 
+        }
+
+        private List<HomeModel> getAutocompleteList()
+        {
+            DbAccess dbAccess = new DbAccess();
+            SqlCommand cmd = dbAccess.sqlCon.CreateCommand();
+            try
+            {
+                HomeDao dao = new HomeDao();
+                List<HomeModel> autocompleteList = dao.getAutocompleteList(dbAccess, cmd);
+
+                dbAccess.close();
+                return autocompleteList;
+            }
+            catch (DbException)
+            {
+                dbAccess.close();
+                throw;
+            }
         }
 
         public ActionResult About()

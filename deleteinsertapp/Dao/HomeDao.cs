@@ -24,6 +24,18 @@ namespace deleteinsertapp.Dao
             return homeList;
         }
 
+        public List<HomeModel> getAutocompleteList(DbAccess dbAccess, SqlCommand cmd)
+        {
+            cmd.CommandText = this.getAutocompleteListSelectQuery();
+
+            DataTable dt = new DataTable();
+            dt = dbAccess.executeQuery(cmd);
+
+            List<HomeModel> autocompleteList = this.getAutocompleteListBindDataTable(dt);
+
+            return autocompleteList;
+        }
+
 
         public int deleteLicense(HomeViewModel vm, SqlCommand cmd, DbAccess dbAccess)
         {
@@ -87,6 +99,20 @@ namespace deleteinsertapp.Dao
             return sb.ToString();
         }
 
+
+        private string getAutocompleteListSelectQuery()
+        {
+            StringBuilder sb = new StringBuilder();
+
+            sb.Append(" SELECT")
+              .Append(" CODE")
+              .Append(" , LICENSE_NAME")
+              .Append(" FROM")
+              .Append(" AUTOCOMPLETE");
+
+            return sb.ToString();
+        }
+
         private List<HomeModel> getHomeListBindDataTable(DataTable dt)
         {
             List<HomeModel> homeList = new List<HomeModel>();
@@ -109,6 +135,30 @@ namespace deleteinsertapp.Dao
             }
 
             return homeList;
+        }
+
+        private List<HomeModel> getAutocompleteListBindDataTable(DataTable dt)
+        {
+            List<HomeModel> autocompleteList = new List<HomeModel>();
+
+
+            foreach (DataRow dr in dt.Rows)
+            {
+                HomeModel homeModel = new HomeModel();
+
+                if (!(dr["CODE"] is DBNull))
+                {
+                    homeModel.Code = Convert.ToString(dr["CODE"]);
+                }
+                if (!(dr["LICENSE_NAME"] is DBNull))
+                {
+                    homeModel.LicenseName = Convert.ToString(dr["LICENSE_NAME"]);
+                }
+                autocompleteList.Add(homeModel);
+
+            }
+
+            return autocompleteList;
         }
 
 

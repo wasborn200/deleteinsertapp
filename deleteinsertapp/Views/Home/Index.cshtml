@@ -8,8 +8,14 @@
                 <div class="row input-field" id="inputfield1">
                     <div class="col-4">
                         １：
-                        @Html.TextBoxFor(model => model.LIC1,
-                        new { id = "input1", size = "40" ,onInput = "checkForm(this)",maxlength = '2' })
+                        <input asp-for="model.LIC1" id="input1" size="40" onInput = "checkForm(this)"
+                               autocomplete = "on" list = "test"/>
+                        <datalist id="test">
+                            @foreach (var item in ViewBag.AutocompleteOptions)
+                            {
+                                <option value="@item.Value"></option>
+                            }
+                        </datalist>
                     </div>
                     <div class="col-4">
                         @Html.DropDownListFor(model => model.MM1,
@@ -97,13 +103,13 @@
 
 <script type="text/javascript">
 <!--
-    function checkForm($this) {
-        var str = $this.value;
-        while (str.match(/[^A-Z^a-z^{2}]/)) {
-            str = str.replace(/[^A-Z^a-z^{2}]/, "");
-        }
-        $this.value = str;
-    }
+    //function checkForm($this) {
+    //    var str = $this.value;
+    //    while (str.match(/[^A-Z^a-z^{2}]/)) {
+    //        str = str.replace(/[^A-Z^a-z^{2}]/, "");
+    //    }
+    //    $this.value = str;
+    //}
 
     $(document).on('ontouched click', '.autocomplete', function () {
         var text = $(this).data('autocomplete');

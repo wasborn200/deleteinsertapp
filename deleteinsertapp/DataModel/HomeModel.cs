@@ -17,5 +17,8 @@ namespace deleteinsertapp.DataModel
         public string MM3 { get; set; }
         public string str4 { get; set; }
         public string MM4 { get; set; }
+
+        public string Code { get; set; }
+        public string LicenseName { get; set; }
     }
 }
